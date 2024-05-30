@@ -254,6 +254,17 @@ $\\
 \indent\textbullet\ $\hat{y}_i$ is predicted value of the i-th element\\
 \indent\textbullet\ $\eta$ is learning rate \\
 
+\subsection{FCN}
+Fully Convolutional Neural Networks (FCNs) were first proposed in Wang et al. (2017b) for classifying univariate time series and validated on 44 datasets from the UCR/UEA archive. FCNs are mainly convolutional networks that do not contain any local pooling layers which means that the length of a time series is kept unchanged throughout the convolutions. In addition, one of the main characteristics of this architecture is the replacement of the traditional final FC layer with a Global Average Pooling (GAP) layer which reduces drastically the number of parameters in a neural network while enabling the use of the CAM (Zhou et al., 2016) that highlights which parts of the input time series contributed the most to a certain classification.  [11]
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{1\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{bibliography/fullyConvolutionalNeuralNetworkArchitecture.png}
+        \caption{Fully Convolutional Neural Network architecture [11]}
+        \label{fig11}
+    \end{minipage}
+\end{figure}
 
 
 %% UNCOMMENT these lines below (and remove the 2 commands above) if you want to embed the bibliografy.
