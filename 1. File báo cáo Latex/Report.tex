@@ -215,6 +215,44 @@ Stacking, short for Stacked Generalization, is a machine learning algorithm belo
   \end{minipage}
 \end{figure}
 
+\subsection{RNN}
+RNN (Recurrent Neural Network) is a type of artificial neural network with feedback connections closed by loop. The looping structure allows the network to store past information in the hidden state and use that past information to improve the performance of the network. In figure 8, the inputs \( x_t \) will be combined with the hidden layer \( h_{t-1} \) using an activation function to compute the current hidden layer \( h_t \).
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.9\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/RNN.png}
+    \caption{RNN Architecture [8]}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+\noindent Forward propagation :\\
+\\$
+a^{<t>}=g_1\left(W_{a a} a^{<t-1>}+W_{a x} x^{<t>}+b_a\right)\quad [9]
+$\\
+\\$
+y^{<t>}=g_2\left(W_{y a} a^{<t>}+b_y\right)\quad [9]
+$\\
+\\Where:\\
+\indent\textbullet\ $x^{<t>}$ is the input value at time step t\\
+\indent\textbullet\ $a^{<t>}$ is the state at time step t\\
+\indent\textbullet\ $y^{<t>}$ is the output value at time step t\\
+\indent\textbullet\ $\mathrm{W}_{\mathrm{aa}}, \mathrm{W}_{\mathrm{ax}}, \mathrm{W}_{\mathrm{ya}}$ are weights\\
+\indent\textbullet\ $b_a$ và $b_y$ are bias\\
+\indent\textbullet\ $\mathrm{g}_1$ is activation function(e.g., tanh, ReLU)\\
+\indent\textbullet\ $\mathrm{g}_2$ is activation function(e.g., softmax)\\
+\\\noindent Backward propagation :\\
+\\$L = \frac{1}{N} \sum_{i=1}^{N} (y_i - \hat{y}_i)^2\quad [9]$\\
+\\$W_{a y}^{(t+1)}=W_{a y}^{(t)}-\eta \frac{\partial \mathcal{L}}{\partial W_{a y}}\quad [9]$\\
+\\$W_{a a}^{(t+1)}=W_{a a}^{(t)}-\eta \frac{\partial \mathcal{L}}{\partial W_{a a}}\quad [9]$\\
+\\$W_{x a}^{(t+1)}=W_{x a}^{(t)}-\eta \frac{\partial \mathcal{L}}{\partial W_{x a}}\quad [9]$\\
+\\$b_y^{(t+1)}=b_y^{(t)}-\eta \frac{\partial \mathcal{L}}{\partial b_y}\quad [9]$\\
+\\$b_h^{(t+1)}=b_h^{(t)}-\eta \frac{\partial \mathcal{L}}{\partial b_h} \quad [9]$\\
+\\Where:\\
+\indent\textbullet\ $y_i$ is actual value of the i-th element\\
+\indent\textbullet\ $\hat{y}_i$ is predicted value of the i-th element\\
+\indent\textbullet\ $\eta$ is learning rate \\
 
 \subsection{FCN}
 Fully Convolutional Neural Networks (FCNs) were first proposed in Wang et al. (2017b) for classifying univariate time series and validated on 44 datasets from the UCR/UEA archive. FCNs are mainly convolutional networks that do not contain any local pooling layers which means that the length of a time series is kept unchanged throughout the convolutions. In addition, one of the main characteristics of this architecture is the replacement of the traditional final FC layer with a Global Average Pooling (GAP) layer which reduces drastically the number of parameters in a neural network while enabling the use of the CAM (Zhou et al., 2016) that highlights which parts of the input time series contributed the most to a certain classification.  [11]
@@ -227,8 +265,6 @@ Fully Convolutional Neural Networks (FCNs) were first proposed in Wang et al. (2
         \label{fig11}
     \end{minipage}
 \end{figure}
-
-
 
 
 %% UNCOMMENT these lines below (and remove the 2 commands above) if you want to embed the bibliografy.
