@@ -1,0 +1,7 @@
+This is a dataset about the stock market of three airlines listed on the Vietnam stock exchange
+- time: specifies trading date
+- open: opening price
+- high: maximum price during the day
+- low: minimum price during the day
+- close: close price adjusted for splits
+- volume: the number of shares that changed hands during a given day
