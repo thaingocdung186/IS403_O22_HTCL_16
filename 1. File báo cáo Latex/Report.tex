@@ -17,15 +17,12 @@
 
 \title{\fontsize{21}{25}\selectfont Predicting Vietnamese airlines' stock prices utilizing statistical, machine learning, and deep learning algorithms (2019 - 2024)}
 
-\author{
-\begin{tabular}{@{}m{0.3\linewidth}@{\hskip 0.1in}m{0.3\linewidth}@{\hskip 0.1in}m{0.3\linewidth}@{}}
-\centering 1st Tran Hoang Nhat & \centering 2nd Thai Ngoc Dung & \centering 3rd Nguyen Hoang Vu \tabularnewline
-\centering IS403.O22.HTCL & \centering IS403.O22.HTCL & \centering IS403.O22.HTCL \tabularnewline
-\centering University of Information Technology & \centering University of Information Technology & \centering University of Information Technology \tabularnewline
-\centering Ho Chi Minh City & \centering Ho Chi Minh City & \centering Ho Chi Minh City \tabularnewline
-\centering \href{mailto:21522420@gm.uit.edu.vn}{21522420@gm.uit.edu.vn} & \centering \href{mailto:21521982@gm.uit.edu.vn}{21521982@gm.uit.edu.vn} & \centering \href{mailto:21522799@gm.uit.edu.vn}{21522799@gm.uit.edu.vn} \tabularnewline
-\end{tabular}
-}
+\author{\uppercase{Tran Hoang Nhat}\authorrefmark{1},
+\uppercase{Thai Ngoc Dung\authorrefmark{2}, and Nguyen Hoang Vu}\authorrefmark{3}}
+
+\address[1]{Faculty of Information Systems, University of Information Technology, (e-mail: 21522420@gm.uit.edu.vn}
+\address[2]{Faculty of Information Systems, University of Information Technology, (e-mail: 21521982@gm.uit.edu.vn)}
+\address[3]{Faculty of Information Systems, University of Information Technology, (e-mail: 21522799@gm.uit.edu.vn)}
 
 
 \begin{document}
@@ -215,7 +212,6 @@ Stacking, short for Stacked Generalization, is a machine learning algorithm belo
   \end{minipage}
 \end{figure}
 
-
 \subsection{RNN}
 RNN (Recurrent Neural Network) is a type of artificial neural network with feedback connections closed by loop. The looping structure allows the network to store past information in the hidden state and use that past information to improve the performance of the network. In figure 8, the inputs \( x_t \) will be combined with the hidden layer \( h_{t-1} \) using an activation function to compute the current hidden layer \( h_t \).
 
@@ -254,6 +250,7 @@ $\\
 \indent\textbullet\ $y_i$ is actual value of the i-th element\\
 \indent\textbullet\ $\hat{y}_i$ is predicted value of the i-th element\\
 \indent\textbullet\ $\eta$ is learning rate \\
+
 
 \subsection{LSTM}
 Long Short-Term Memory (LSTM) is an advanced variant of recurrent neural network (RNN) architecture used in the field of deep learning. Its goal is to give RNN a "long short-term memory" — a short-term memory that can endure thousands of timesteps.
@@ -323,6 +320,370 @@ Fully Convolutional Neural Networks (FCNs) were first proposed in Wang et al. (2
         \label{fig11}
     \end{minipage}
 \end{figure}
+
+\section{Result}
+\subsection{Evaluation Methods}
+\textbf{Root Mean Squared Error} (RMSE): is the square root of average value of squared error in a set of predicted values.\\
+\[RMSE=\sqrt{\sum_{i=1}^{n} \frac{(\hat{y_i}-y_i )^2}{n} }\]\\
+\textbf{Mean Absolute Percentage Error} (MAPE): is the average percentage error in a set of predicted values.\\
+\[MAPE = \frac{1}{n} \sum_{i=1}^{n} \left| \frac{y_i - \hat{y}_i}{y_i} \right| \times 100\%\]\\
+\textbf{Mean Squared Logarithmic Error} (MSLE):is the relative difference between the log-transformed actual and predicted values.\\
+\[MSLE=\frac{1}{n}\sum_{i=1}^{n}(log(1+\hat{y_i})-log(1+y_i))^2\]
+Where: \\
+	\indent\textbullet\ \(n\) is the number of observations in the dataset.\\
+	\indent\textbullet\ \(y_i\)  is the true value.\\
+	\indent\textbullet\ \(\hat{y_i}\) is the predicted value.
+\subsection{HVN Dataset} 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+         \hline
+         \multicolumn{5}{|c|}{\textbf{HVN Dataset's Evaluation}}\\
+         \hline
+         \centering Model & Training:Testing & RMSE & MAPE (\%) & MSLE\\
+         \hline
+         \multirow{2}{*}{LR} & \textbf{7:3} & \textbf{3993.14} & 24.3741 & \textbf{0.07304} \\ & 8:2 & 4163.78 & \textbf{13.5631} & 0.07678 \\ & 9:1 & 5940.92 & 22.6138 & 0.15792\\
+         \hline
+         \multirow{2}{*}{ARIMA} & 7:3&3581.65&16.3043&0.06087\\ & \textbf{8:2}&\textbf{3341.08}&\textbf{10.9181}&\textbf{0.04085} \\ & 9:1 & 5375.16 & 19.9011 &0.11742\\
+         \hline
+         \multirow{2}{*}{SEMOS} & \textbf{7:3}	& \textbf{610.171} & \textbf{2.65241} & \textbf{0.00141} \\ & 8:2 & 1616.817 & 1.267 & 0.00035 \\ & 9:1 & 1699.655  & 1.052 & 0.00032\\
+         \hline
+         \multirow{2}{*}{Stacking} & \textbf{7:3} &  \textbf{197.562} & \textbf{0.92907} & \textbf{0.00015} \\ & 8:2 & 240.401 & 1.01158 & 0.00021 \\ & 9:1 & 434.257  & 1.59473 & 0.00038\\
+         \hline
+         \multirow{2}{*}{RNN} & \textbf{7:3}	& \textbf{610.171} & \textbf{2.65241} & \textbf{0.00141} \\ & 8:2 & 776.437 & 2.90091 & 0.00179 \\ & 9:1 & 1254.82  & 4.54483 & 0.00329\\
+         \hline
+         \multirow{2}{*}{FCN} & 7:3 & 2523.85 & 17.0891 & 0.04537 \\ & 8:2 &	\textbf{990.824} & 5.53287 & 0.00654 \\ & \textbf{9:1} & 1226.98	& \textbf{5.30376} & \textbf{0.00492}\\
+         \hline
+         \multirow{2}{*}{GRU} & \textbf{7:3} & \textbf{424.191} & \textbf{1.74601} & \textbf{0.00069} \\ & 8:2 & 440.368 & 2.00419 & 0.00072 \\ & 9:1 &  880.814 & 3.36061 & 0.00171 \\
+         \hline
+         \multirow{2}{*}{LSTM} & \textbf{7:3} & \textbf{517.393} &  \textbf{2.26375} &  \textbf{0.00108} \\ & 8:2 & 603.747 &  2.45307 &  0.00126 \\ & 9:1 & 851.073 & 3.27205 & 0.00162\\
+         \hline
+    \end{tabular}
+    \caption{HVN Dataset's Evaluation}
+    \label{vcbresult}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Image_Result/LinearRegression_HVN_73.png}
+    \caption{Linear model's result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Image_Result/ARIMA_HVN_82.png}
+    \caption{ARIMA model's result with 8:2 splitting proportion}
+    \label{fig9}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Stacking_HVN_73.png}
+    \caption{SEMOS model's result with 9:1 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Image_Result/Stacking_HVN_73.png}
+    \caption{Stacking model's result with 7:3 splitting proportion}
+    \label{fig9}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Image_Result/RNN_HVN_73.png}
+    \caption{RNN model's result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Image_Result/fcn_hvn_91.png}
+    \caption{FCN model's result with 9:1 splitting proportion}
+    \label{fig9}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Figure/GRU_HVN_73.png}
+    \caption{GRU model's result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Figure/LSTM_HVN_73.png}
+    \caption{LSTM model's result with 7:3 splitting proportion}
+    \label{fig9}
+  \end{minipage}
+\end{figure}
+
+\subsection{SCS dataset} 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+         \hline
+         \multicolumn{5}{|c|}{\textbf{SCS Dataset's Evaluation}}\\
+         \hline
+         \centering Model & Training:Testing & RMSE & MAPE (\%) & MSLE\\
+         \hline
+         \multirow{2}{*}{LR} & 7:3 & 9905.85 & 13.9523 & 0.02007 \\ & \textbf{8:2} & \textbf{7788.89} & 10.3625 & \textbf{0.01199} \\ & 9:1 & 8985.64 & \textbf{9.69887} & 0.01395\\
+         \hline
+         \multirow{2}{*}{ARIMA} & \textbf{7:3}&\textbf{7633.15}&\textbf{6.23802}&\textbf{0.01103}\\ & 8:2&11243.2&10.7119&0.02545 \\ & 9:1 &  13349.1 & 12.7524& 0.03356\\
+         \hline
+         \multirow{2}{*}{SEMOS} & \textbf{7:3}	& \textbf{1545.676} & \textbf{1.262} & \textbf{0.00033} \\ & 8:2 & 1616.817 & 1.267 & 0.00035 \\ & 9:1 & 1699.655  & 1.052 & 0.00032\\
+         \hline
+         \multirow{2}{*}{Stacking} & \textbf{7:3} &  \textbf{457.389} &  \textbf{0.48271} & \textbf{0.00004} \\ & 8:2 &  532.678 & 0.53753 &  0.00005 \\ & 9:1 & 678.649 & 0.64756 & 0.00006\\
+         \hline
+         \multirow{2}{*}{RNN} & \textbf{7:3} &  \textbf{1441.73} &  \textbf{1.41166} & \textbf{0.00038} \\ & 8:2 &  1576.35 & 1.60094 &  0.00046 \\ & 9:1 & 1715.44 & 1.60622 & 0.00041\\
+         \hline
+         \multirow{2}{*}{FCN} & 7:3 & \textbf{1755.93} & 2.12337 & 0.00064 \\ & \textbf{8:2} &	1765.97 & \textbf{1.91911} & \textbf{0.00058} \\ & 9:1 & 2607.35	& 2.81101 & 0.00112\\
+         \hline
+         \multirow{2}{*}{GRU} & \textbf{7:3} & \textbf{946.301} & \textbf{0.88267} & \textbf{0.00017} \\ & 8:2 & 1257.21 & 1.14076 & 0.00028 \\ & 9:1 & 1475.51 &	1.31043 & 0.00031 \\
+         \hline
+         \multirow{2}{*}{LSTM} & 7:3 & 1299.93 &  1.34468 &  0.00032 \\ & \textbf{8:2} & \textbf{1260.76} &  \textbf{1.16337} &  \textbf{0.00028} \\ & 9:1 & 2390.65 & 2.37200 & 0.00081\\
+         \hline
+    \end{tabular}
+    \caption{SCS Dataset's Evaluation}
+    \label{vcbresult}
+\end{table}
+
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Image_Result/LinearRegression_SCS_82.png}
+    \caption{Linear model's result with 8:2 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Image_Result/ARIMA_SCS_73.png}
+    \caption{ARIMA model's result with 7:3 splitting proportion}
+    \label{fig9}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Image_Result/Stacking_HVN_73.png}
+    \caption{SEMOS model's result with 9:1 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Image_Result/Stacking_SCS_73.png}
+    \caption{Stacking model's result with 7:3 splitting proportion}
+    \label{fig9}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Image_Result/RNN_SCS_73.png}
+    \caption{RNN model's result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Image_Result/fcn_scs_82.png}
+    \caption{FCN model's result with 8:2 splitting proportion}
+    \label{fig9}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Figure/GRU_SCS_73.png}
+    \caption{GRU model's result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Figure/LSTM_SCS_82.png}
+    \caption{LSTM model's result with 8:2 splitting proportion}
+    \label{fig9}
+  \end{minipage}
+\end{figure}
+
+\subsection{VJC dataset} 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+         \hline
+         \multicolumn{5}{|c|}{\textbf{VJC Dataset's Evaluation}}\\
+         \hline
+         \centering Model & Training:Testing & RMSE & MAPE (\%) & MSLE\\
+         \hline
+         \multirow{2}{*}{LR} & 7:3 & 21720.7 & 20.7604 & 0.03762 \\ & 8:2 & 12454.9 & 11.3989 & 0.01373 \\ & \textbf{9:1} & \textbf{4220.91} & \textbf{2.76031} & \textbf{0.00149}\\
+         \hline
+         \multirow{2}{*}{ARIMA} & 7:3&7056.66&5.94446&0.00465\\ & 8:2&7807.39&5.87333&0.00579 \\ & \textbf{9:1} & \textbf{4857.61} & \textbf{4.07812} &\textbf{0.00203}\\
+         \hline
+         \multirow{2}{*}{SEMOS} & \textbf{7:3}	& \textbf{1545.676} & \textbf{1.262} & \textbf{0.00033} \\ & 8:2 & 1616.817 & 1.267 & 0.00035 \\ & 9:1 & 1699.655  & 1.052 & 0.00032\\
+         \hline
+         \multirow{2}{*}{Stacking} & \textbf{7:3} & \textbf{791.931} &  \textbf{0.56862} &  \textbf{0.00005} \\ & 8:2 &  859.683 & 0.57597 & 0.00006 \\ & 9:1 & 985.981 & 0.66053 & 0.00007\\
+         \hline
+         \multirow{2}{*}{RNN} & \textbf{7:3}	& \textbf{2153.31} & \textbf{1.49846} & \textbf{0.00042} \\ & 8:2 & 2332.43 & 1.40122 & 0.00047 \\ & 9:1 & 3634.93 & 2.16684 & 0.00107\\
+         \hline
+         \multirow{2}{*}{FCN} & 7:3 & 5254.80 & 4.36589 & 0.00263 \\ & 8:2 &	2682.99 & 2.05971 & 0.00065 \\ & \textbf{9:1} & \textbf{2646.81}	& \textbf{1.53967} & \textbf{0.00057}\\
+         \hline
+         \multirow{2}{*}{GRU} & \textbf{7:3} & \textbf{1502.23} & \textbf{0.95296} & \textbf{0.00021} \\ & 8:2 & 1697.52 & 0.99987 & 0.00025 \\ & 9:1 & 2567.96 & 1.47789 & 0.00054 \\
+         \hline
+         \multirow{2}{*}{LSTM} & 7:3 & 1793.41 &  1.24209 & 0.00029 \\ & \textbf{8:2} & \textbf{1726.18} &  \textbf{1.03356} &  \textbf{0.00026} \\ & 9:1 & 2684.56 & 1.71757 & 0.00058\\
+         \hline
+    \end{tabular}
+    \caption{VJC Dataset's Evaluation}
+    \label{vcbresult}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Image_Result/LinearRegression_VJC_91.png}
+    \caption{Linear model's result with 9:1 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Image_Result/ARIMA_VJC_91.png}
+    \caption{ARIMA model's result with 9:1 splitting proportion}
+    \label{fig9}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Stacking_HVN_73.png}
+    \caption{SEMOS model's result with 9:1 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Image_Result/Stacking_VJC_73.png}
+    \caption{Stacking model's result with 7:3 splitting proportion}
+    \label{fig9}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Image_Result/RNN_VJC_73.png}
+    \caption{RNN model's result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Image_Result/fcn_vjc_91.png}
+    \caption{FCN model's result with 9:1 splitting proportion}
+    \label{fig9}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Figure/GRU_VJC_73.png}
+    \caption{GRU model's result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Figure/LSTM_VJC_82.png}
+    \caption{LSTM model's result with 8:2 splitting proportion}
+    \label{fig9}
+  \end{minipage}
+\end{figure}
+
+
+\section{Conclusion}
+\subsection{Summary}
+In the pursuit of forecasting stock prices, a variety of methodologies have been explored, ranging from traditional statistical models to advanced machine learning algorithms. Among the models applied, Linear Regression (LR), Auto Regressive Integrated Moving Average (ARIMA), Recurrent Neural Networks (RNN), Gated Recurrent Unit (GRU), Long Short-Term Memory (LSTM), Seasonal Exponential Smoothing (SEMOS), Stacking, and Fully Convolutional Networks (FCN), it is evident that GRU, LSTM, and Stacking emerge as the most promising and effective models for predicting stock prices.
+
+The complexities of stock price forecasting, rooted in the intricacies and unpredictability of financial markets, demand models capable of capturing nuanced patterns and relationships within the data. GRU models exhibit notable performance in forecasting stock prices by capturing sequential dependencies. LSTM models further enhance this capability by effectively handling long-term dependencies, providing robust predictions. The introduction of ensemble learning through Stacking refines the predictive capabilities even further, offering collective insights that surpass individual models.
+
+As evidenced by the evaluation metrics, including RMSE, MAPE, and MSLE, the GRU, LSTM, and Stacking models consistently demonstrate superior performance across various aspects of forecasting accuracy. Their adaptability to handle the inherent uncertainties of stock markets positions them as formidable tools for investors and analysts seeking reliable predictions.
+
+\subsection{Future Considerations}
+In our future research, it is crucial to prioritize further optimization of the previously mentioned models. This optimization effort should specifically focus on:
+\indent\textbullet\ Enhancing the accuracy of the model. While the above algorithms have demonstrated promising results in predicting stock prices, there is a need to further improve the model's accuracy to ensure more precise forecasting outcomes.\
+\indent\textbullet\ Exploring alternative machine learning algorithms or ensemble techniques. Ensemble techniques, such as combining multiple models or using various ensemble learning methods, can also improve the robustness and accuracy of the forecasts.\
+\indent\textbullet\ Researching new forecasting models. The field of forecasting continuously evolves, with new algorithms and models being researched and developed. It is crucial to stay updated with these approaches and explore new forecasting models that offer improved accuracy and performance.\
+
+By continuously exploring and incorporating new features, data sources, and modeling techniques, we can strive for ongoing optimization of the forecasting models and enhance their ability to predict stock prices with greater precision and reliability.
+\section*{Acknowledgment}
+\addcontentsline{toc}{section}{Acknowledgment}
+First and foremost, we would like to express our sincere gratitude to \textbf{Assoc. Prof. Dr. Nguyen Dinh Thuan} and \textbf{Mr. Nguyen Minh Nhut} for their exceptional guidance, expertise, and invaluable feedback throughout the research process. Their mentorship and unwavering support have been instrumental in shaping the direction and quality of this study. Their profound knowledge, critical insights, and attention to detail have significantly contributed to the success of this research.
+\\This research would not have been possible without the support and contributions of our mentors. We would like to extend our heartfelt thanks to everyone involved for their invaluable assistance, encouragement, and belief in our research. Thank you all for your invaluable assistance and encouragement.
 
 
 %% UNCOMMENT these lines below (and remove the 2 commands above) if you want to embed the bibliografy.
