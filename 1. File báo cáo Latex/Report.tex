@@ -33,7 +33,7 @@
 
 \begin{abstract}
 
-Stock prediction plays a crucial role in economic planning and investment decision-making. This study focuses on leveraging advanced statistical,  machine learning and deep learning algorithms to predict stock prices in the Vietnamese market, with a particular emphasis on HVN, SCS, VJC. Eight time-series models, including Linear Regression, ARIMA,  RNN, GRU, LSTM, SEMOS, Stacking and FCN, are utilized for prediction. Evaluation of these models is conducted using metrics such as MAPE, RMSE, and MSLE. Furthermore, related research on stock price prediction utilizing 8 algorithms has been examined and analyzed to demonstrate their effectivenes. The dataset spans from 01/03/2019 to 31/05/2024, and only the "Close" prices (VND) are considered for analysis.After testing on HVN, SCS and VJC datasets for comparison, the result showed that the Stacking (with ARIMAX and RNN as the base models, Linear Regression as the meta model) gave the best performance in predicting stock prices of these 3 datasets.
+Stock prediction plays a crucial role in economic planning and investment decision-making. This study focuses on leveraging advanced statistical,  machine learning and deep learning algorithms to predict stock prices in the Vietnamese market, with a particular emphasis on HVN, SCS, VJC. Eight time-series models, including Linear Regression, ARIMA,  RNN, GRU, LSTM, SEMOS, Stacking and FCN, are utilized for prediction. Evaluation of these models is conducted using metrics such as MAPE, RMSE, and MSLE. Furthermore, related research on stock price prediction utilizing 8 algorithms has been examined and analyzed to demonstrate their effectivenes. The dataset spans from 01/03/2019 to 01/06/2024, and only the "Close" prices (VND) are considered for analysis.After testing on HVN, SCS and VJC datasets for comparison, the result showed that the Stacking (with ARIMAX and RNN as the base models, Linear Regression as the meta model) gave the best performance in predicting stock prices of these 3 datasets.
 
 \end{abstract}
 \begin{keywords}
@@ -71,7 +71,7 @@ In the study by Xiwen Jin and Chaoran Yi, they conducted a comparison of the eff
 \section{Materials}
 \subsection{Dataset}
 
-The historical stock price of Vietnam Airlines JSC (HVN), SCSC Cargo Service Corporation (SCS) and Vietjet Aviation Joint Stock Company (VJC) from 01/03/2019 to 29/02/2024 will be applied. The data contains column such as Date, Open, High, Low, Close, Volume. As the goal is to forecast close prices, only data relating to column “close" (VND) will be processed.
+The historical stock price of Vietnam Airlines JSC (HVN), SCSC Cargo Service Corporation (SCS) and Vietjet Aviation Joint Stock Company (VJC) from 01/03/2019 to 01/06/2024 will be applied. The data contains column such as Date, Open, High, Low, Close, Volume. As the goal is to forecast close prices, only data relating to column “close" (VND) will be processed.
 
 \subsection{Descriptive Statistics}
 \begin{table}[H]
@@ -80,14 +80,14 @@ The historical stock price of Vietnam Airlines JSC (HVN), SCSC Cargo Service Cor
 \begin{tabular}{|>{\columncolor{red!20}}c|c|c|c|}
     \hline
      \rowcolor{red!20} & HVN & SCS & VJC \\ \hline
-     Count & 1,245 & 1,253 & 1,252 \\ \hline
-     Mean & 20,266 & 63,678 & 117,882\\ \hline
-     Std & 6,462& 8,429 & 14,232\\ \hline
+     Count & 1,307 & 1,315 & 1,314 \\ \hline
+     Mean & 20,134 & 64,511 & 117,339\\ \hline
+     Std & 6,404& 9,116 & 14,156\\ \hline
      Min & 8,610 & 37,320 & 93,800\\ \hline
-     25\% & 13,500 & 59,500 & 105,500\\ \hline
-     50\% & 21,011 & 64,629 & 117,400\\ \hline
-     75\% & 25,000 & 67,350 & 129,000\\ \hline
-     Max & 34,753 & 85,420 & 149,000\\ \hline
+     25\% & 13,500 & 59,605 & 105,000\\ \hline
+     50\% & 20,853 & 65,030 & 116,200\\ \hline
+     75\% & 24,900 & 68,180 & 128,575\\ \hline
+     Max & 34,753 & 90,900 & 149,000\\ \hline
 \end{tabular}
 \end{table}
 
@@ -160,19 +160,28 @@ $$
 y_t=\mu+\sum_{i=1}^p \gamma_i y_{t-i}+\epsilon_t \quad [7]
 $$
 
-In there : $\mathrm{y}_{\mathrm{t}}$ is the current value; $\mu$ is the constant term; $\mathrm{p}$ is the number of autoregressive terms; $\gamma_{\mathrm{i}}$ is the autocorrelation coefficient and $\varepsilon_{t}$ is error.\\
+Where :\\
+\indent\textbullet\ \(\mathrm{y}_{\mathrm{t}}\) is the current value \\ 
+\indent\textbullet\ \(\mu\) is the constant term \\ 
+\indent\textbullet\ \(\mathrm{p}\) is the number of autoregressive terms \\ 
+\indent\textbullet\ \(\gamma_{\mathrm{i}}\) is the autocorrelation coefficient \\ 
+\indent\textbullet\ \(\varepsilon_{t}\) is error \\
 Moving Average (MA):
 $$
 y_t=\mu+\sum_{i=1}^q \theta_i \epsilon_{t-i}+\epsilon_t \quad [7]
 $$
 
-In there : $\mathrm{y}_{\mathrm{t}}$ is the current value; $\mu$ is the constant term; $\mathrm{q}$ is the number of terms in the moving average; $\theta_{\mathrm{i}}$ is the moving average coefficient  and $\varepsilon_{t}$ is error.\\
+Where: \\
+\indent\textbullet\ \(\mathrm{y}_{\mathrm{t}}\) is the current value \\ 
+\indent\textbullet\ \(\mu\) is the constant term \\ 
+\indent\textbullet\ \(\mathrm{q}\) is the number of terms in the moving average \\ 
+\indent\textbullet\ \(\theta_{\mathrm{i}}\) is the moving average coefficient \\ 
+\indent\textbullet\ \(\varepsilon_{t}\) is error \\
 Integrated (I):\\
  \\$\mathrm{I}(d=0): \Delta y_t=y_t$\\
  \\$\mathrm{I}(d=1): \Delta y_t=y_t-y_{t-1}$\\
  \\$\mathrm{I}(d=2): \Delta\left(\Delta y_t\right)=\left(y_t-y_{t-1}\right)-\left(y_{t-1}-y_{t-2}\right)$ \\
- 
-In there : d is the number of differences required to make it a stationary sequence 
+ Where: \(d\) is the number of differences required to make it a stationary sequence. 
 
 After combining them, we will have the ARIMA (p, d, q) express as follow:
 $$
@@ -279,7 +288,7 @@ The update equations for the LSTM unit are expressed by equation below: \\
 \\$g_i^{(t)} = sigmold (w_ih^{(t-1)} + u_iX^{(t)} + b_i$ \quad[11]\\
 \\$g_f^{(t)} = sigmold (w_fh^{(t-1)} + u_fX^{(t)} + b_f$ \quad[11]\\
 \\$g_f^{(t)} = sigmold (w_oh^{(t-1)} + u_oX^{(t)} + b_o$ \quad[11]\\
-\\ where $f_h$ and $f_s$
+\\ Where: $f_h$ and $f_s$
 represent the activation functions of the 
 system state and internal state, typically utilizing the 
 hyperbolic tangent function.
@@ -324,10 +333,10 @@ Fully Convolutional Neural Networks (FCNs) were first proposed in Wang et al. (2
 
 \section{Result}
 \subsection{Evaluation Methods}
-\textbf{Root Mean Squared Error} (RMSE): is the square root of average value of squared error in a set of predicted values.\\
-\[RMSE=\sqrt{\sum_{i=1}^{n} \frac{(\hat{y_i}-y_i )^2}{n} }\]\\
-\textbf{Mean Absolute Percentage Error} (MAPE): is the average percentage error in a set of predicted values.\\
-\[MAPE = \frac{1}{n} \sum_{i=1}^{n} \left| \frac{y_i - \hat{y}_i}{y_i} \right| \times 100\%\]\\
+\textbf{Root Mean Squared Error} (RMSE): is the square root of average value of squared error in a set of predicted values.
+\[RMSE=\sqrt{\sum_{i=1}^{n} \frac{(\hat{y_i}-y_i )^2}{n} }\]
+\textbf{Mean Absolute Percentage Error} (MAPE): is the average percentage error in a set of predicted values.
+\[MAPE = \frac{1}{n} \sum_{i=1}^{n} \left| \frac{y_i - \hat{y}_i}{y_i} \right| \times 100\%\]
 \textbf{Mean Squared Logarithmic Error} (MSLE):is the relative difference between the log-transformed actual and predicted values.\\
 \[MSLE=\frac{1}{n}\sum_{i=1}^{n}(log(1+\hat{y_i})-log(1+y_i))^2\]
 Where: \\
@@ -608,7 +617,6 @@ While the current study presents significant advancements in stock price predict
 First and foremost, we would like to express our sincere gratitude to \textbf{Assoc. Prof. Dr. Nguyen Dinh Thuan} and \textbf{Mr. Nguyen Minh Nhut} for their exceptional guidance, expertise, and invaluable feedback throughout the research process. Their mentorship and unwavering support have been instrumental in shaping the direction and quality of this study. Their profound knowledge, critical insights, and attention to detail have significantly contributed to the success of this research.
 \\This research would not have been possible without the support and contributions of our mentors. We would like to extend our heartfelt thanks to everyone involved for their invaluable assistance, encouragement, and belief in our research. Thank you all for your invaluable assistance and encouragement.
 
-
 %% UNCOMMENT these lines below (and remove the 2 commands above) if you want to embed the bibliografy.
 \begin{thebibliography}{00}
 \bibitem{b1} S. A. Gyamerah, P. Ngare and D. Ikpe, "On Stock Market Movement Prediction Via Stacking Ensemble Learning Method," 2019 IEEE Conference on Computational Intelligence for Financial Engineering \& Economics (CIFEr), Shenzhen, China, 2019, pp. 1-8, doi: 10.1109/CIFEr.2019.8759062.
@@ -623,14 +631,6 @@ First and foremost, we would like to express our sincere gratitude to \textbf{As
 \bibitem{b10} Nguyen Minh Nhut, “Mo Hinh Mang Hoi Quy (RNN) trong chuoi thoi gian”
 \bibitem{b11} Farhad Mortezapour Shiri, Thinagaran Perumal, Norwati Mustapha and Raihani Mohamed, "A Comprehensive Overview and Comparative Analysis on Deep Learning Models: CNN, RNN, LSTM, GRU", May 2023, doi: 10.48550/arXiv.2305.17473
 \bibitem{b12} H. I. Fawaz, G. Forestier, J. Weber, L. Idoumghar, and P.-A. Muller, "Deep learning for time series classification: a review," Data Mining and Knowledge Discovery, vol. 33, no. 4, pp. 917-963, Jul. 2019, doi: 10.1007/s10618-019-00619-1.
-
-
-
-
 \end{thebibliography}
-%%%%%%%%%%%%%%%
-
-
 \EOD
-
 \end{document}
