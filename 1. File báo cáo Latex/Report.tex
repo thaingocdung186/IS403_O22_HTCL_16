@@ -33,7 +33,8 @@
 
 \begin{abstract}
 
-Stock prediction plays a crucial role in economic planning and investment decision-making. This study focuses on leveraging advanced statistical,  machine learning and deep learning algorithms to predict stock prices in the Vietnamese market, with a particular emphasis on HVN, SCS, VJC. Eight time-series models, including Linear Regression, ARIMA,  RNN, GRU, LSTM, SEMOS, Stacking and FCN, are utilized for prediction. Evaluation of these models is conducted using metrics such as MAPE, RMSE, and MSLE. Furthermore, related research on stock price prediction utilizing 8 algorithms has been examined and analyzed to demonstrate their effectivenes. The dataset spans from 01/03/2019 to 29/02/2024, and only the "Close" prices (VND) are considered for analysis. This study aims to provide stakeholders with actionable insights for informed decision-making in the Vietnamese stock market.
+Stock prediction plays a crucial role in economic planning and investment decision-making. This study focuses on leveraging advanced statistical,  machine learning and deep learning algorithms to predict stock prices in the Vietnamese market, with a particular emphasis on HVN, SCS, VJC. Eight time-series models, including Linear Regression, ARIMA,  RNN, GRU, LSTM, SEMOS, Stacking and FCN, are utilized for prediction. Evaluation of these models is conducted using metrics such as MAPE, RMSE, and MSLE. Furthermore, related research on stock price prediction utilizing 8 algorithms has been examined and analyzed to demonstrate their effectivenes. The dataset spans from 01/03/2019 to 31/05/2024, and only the "Close" prices (VND) are considered for analysis.After testing on HVN, SCS and VJC datasets for comparison, the result showed that the Stacking (with ARIMAX and RNN as the base models, Linear Regression as the meta model) gave the best performance in predicting stock prices of these 3 datasets.
+
 \end{abstract}
 \begin{keywords}
     Vietnam , Stock prices , LR , ARIMA , RNN , GRU , LSTM , SEMOS , Stacking , FCN
@@ -143,26 +144,26 @@ The historical stock price of Vietnam Airlines JSC (HVN), SCSC Cargo Service Cor
 
 \section{Methodology}
 \subsection{Linear Regression}
-Linear Regression is a method of statistical analysis used to determine the relationship between a dependent variable and one or many independent variables. It is used to predict the value of the dependent variable based on the value of the independent variables.
-A multiple linear regression model has the form: 
-\[Y=\beta_0+\beta_1X_1+\beta_2X_2+\cdots+\beta_kX_k+\varepsilon \quad[12]\]
+Linear Regression is a method of statistical analysis used to determine the relationship between a dependent variable and one or more independent variables. The objective is to find the best-fitting linear equation that describes how the dependent variable changes as the independent variables change.
+A simple linear regression model has the form: 
+\[Y=\beta_0+\beta_1X+\varepsilon \quad[6]\]
 Where:\\
-	\indent\textbullet\ Y is the dependent variable.\\
-	\indent\textbullet\ \(X_1, X_2, \ldots, X_k\) are the independent variables.\\
-	\indent\textbullet\ \(\beta_0\) is the intercept term.\\
-	\indent\textbullet\ \(\beta_1,..., \beta_k\) are the regression coefficients for the independent variables.\\
+	\indent\textbullet\ \(Y\) is the dependent variable.\\
+	\indent\textbullet\ \(X\) is the independent variable.\\
+	\indent\textbullet\ \(\beta_0\) is the intercept of the regression line.\\
+	\indent\textbullet\ \(\beta_1\) is the regression coefficient for the independent variable.\\
 	\indent\textbullet\ \(\varepsilon\) is the error term.
  \subsection{ARIMA}
  ARIMA(Autoregressive Integrated Moving Average) is a statistical forecasting method widely used in time series analysis. This model incorporates autoregressive (AR), moving average (MA) and Integrated (I) components to capture the relationship between current and past values of a time series.\\
 Auto Regression (AR): 
 $$
-y_t=\mu+\sum_{i=1}^p \gamma_i y_{t-i}+\epsilon_t \quad [6]
+y_t=\mu+\sum_{i=1}^p \gamma_i y_{t-i}+\epsilon_t \quad [7]
 $$
 
 In there : $\mathrm{y}_{\mathrm{t}}$ is the current value; $\mu$ is the constant term; $\mathrm{p}$ is the number of autoregressive terms; $\gamma_{\mathrm{i}}$ is the autocorrelation coefficient and $\varepsilon_{t}$ is error.\\
 Moving Average (MA):
 $$
-y_t=\mu+\sum_{i=1}^q \theta_i \epsilon_{t-i}+\epsilon_t \quad [6]
+y_t=\mu+\sum_{i=1}^q \theta_i \epsilon_{t-i}+\epsilon_t \quad [7]
 $$
 
 In there : $\mathrm{y}_{\mathrm{t}}$ is the current value; $\mu$ is the constant term; $\mathrm{q}$ is the number of terms in the moving average; $\theta_{\mathrm{i}}$ is the moving average coefficient  and $\varepsilon_{t}$ is error.\\
@@ -175,7 +176,7 @@ In there : d is the number of differences required to make it a stationary seque
 
 After combining them, we will have the ARIMA (p, d, q) express as follow:
 $$
-y_t=\mu+\sum_{i=1}^p \gamma_i y_{t-i}+\sum_{i=1}^q \theta_i \epsilon_{t-i}+\epsilon_t \quad [6]
+y_t=\mu+\sum_{i=1}^p \gamma_i y_{t-i}+\sum_{i=1}^q \theta_i \epsilon_{t-i}+\epsilon_t \quad [7]
 $$
 \subsection{SEMOS}
 SEMOS (Smooth EMOS) is a statistical approach used for post-processing ensemble forecasts, particularly to handle seasonal variations in the predictive distribution parameters. SEMOS integrates seasonal effects directly into the estimation of location and scale parameters, enhancing the accuracy of ensemble forecasts, especially for quantities exhibiting seasonal variability.
@@ -207,7 +208,7 @@ Stacking, short for Stacked Generalization, is a machine learning algorithm belo
   \begin{minipage}{0.9\linewidth}
     \centering
     \includegraphics[width=\linewidth]{bibliography/Stacking.png}
-    \caption{Stacking Architecture [7]}
+    \caption{Stacking Architecture [8]}
     \label{fig8}
   \end{minipage}
 \end{figure}
@@ -220,16 +221,16 @@ RNN (Recurrent Neural Network) is a type of artificial neural network with feedb
   \begin{minipage}{0.9\linewidth}
     \centering
     \includegraphics[width=\linewidth]{bibliography/RNN.png}
-    \caption{RNN Architecture [8]}
+    \caption{RNN Architecture [9]}
     \label{fig8}
   \end{minipage}
 \end{figure}
 \noindent Forward propagation :\\
 \\$
-a^{<t>}=g_1\left(W_{a a} a^{<t-1>}+W_{a x} x^{<t>}+b_a\right)\quad [9]
+a^{<t>}=g_1\left(W_{a a} a^{<t-1>}+W_{a x} x^{<t>}+b_a\right)\quad [10]
 $\\
 \\$
-y^{<t>}=g_2\left(W_{y a} a^{<t>}+b_y\right)\quad [9]
+y^{<t>}=g_2\left(W_{y a} a^{<t>}+b_y\right)\quad [10]
 $\\
 \\Where:\\
 \indent\textbullet\ $x^{<t>}$ is the input value at time step t\\
@@ -240,12 +241,12 @@ $\\
 \indent\textbullet\ $\mathrm{g}_1$ is activation function(e.g., tanh, ReLU)\\
 \indent\textbullet\ $\mathrm{g}_2$ is activation function(e.g., softmax)\\
 \\\noindent Backward propagation :\\
-\\$L = \frac{1}{N} \sum_{i=1}^{N} (y_i - \hat{y}_i)^2\quad [9]$\\
-\\$W_{a y}^{(t+1)}=W_{a y}^{(t)}-\eta \frac{\partial \mathcal{L}}{\partial W_{a y}}\quad [9]$\\
-\\$W_{a a}^{(t+1)}=W_{a a}^{(t)}-\eta \frac{\partial \mathcal{L}}{\partial W_{a a}}\quad [9]$\\
-\\$W_{x a}^{(t+1)}=W_{x a}^{(t)}-\eta \frac{\partial \mathcal{L}}{\partial W_{x a}}\quad [9]$\\
-\\$b_y^{(t+1)}=b_y^{(t)}-\eta \frac{\partial \mathcal{L}}{\partial b_y}\quad [9]$\\
-\\$b_h^{(t+1)}=b_h^{(t)}-\eta \frac{\partial \mathcal{L}}{\partial b_h} \quad [9]$\\
+\\$L = \frac{1}{N} \sum_{i=1}^{N} (y_i - \hat{y}_i)^2\quad [10]$\\
+\\$W_{a y}^{(t+1)}=W_{a y}^{(t)}-\eta \frac{\partial \mathcal{L}}{\partial W_{a y}}\quad [10]$\\
+\\$W_{a a}^{(t+1)}=W_{a a}^{(t)}-\eta \frac{\partial \mathcal{L}}{\partial W_{a a}}\quad [10]$\\
+\\$W_{x a}^{(t+1)}=W_{x a}^{(t)}-\eta \frac{\partial \mathcal{L}}{\partial W_{x a}}\quad [10]$\\
+\\$b_y^{(t+1)}=b_y^{(t)}-\eta \frac{\partial \mathcal{L}}{\partial b_y}\quad [10]$\\
+\\$b_h^{(t+1)}=b_h^{(t)}-\eta \frac{\partial \mathcal{L}}{\partial b_h} \quad [10]$\\
 \\Where:\\
 \indent\textbullet\ $y_i$ is actual value of the i-th element\\
 \indent\textbullet\ $\hat{y}_i$ is predicted value of the i-th element\\
@@ -262,7 +263,7 @@ A vanilla LSTM unit is composed of a cell, an input gate, an output gate and a f
   \begin{minipage}{0.8\linewidth}
     \centering
     \includegraphics[width=\linewidth]{bibliography/Figure/lstm.png}
-    \caption{LSTM Model At Time Step t [10]}
+    \caption{LSTM Model At Time Step t [11]}
     \label{fig9}
   \end{minipage}
 \end{figure}
@@ -273,11 +274,11 @@ Where:\\
 \indent\textbullet\ Forget Gate: conditionally decides what information to throw away from the block.\\
 
 The update equations for the LSTM unit are expressed by equation below: \\
-\\$h^{(t)} = g_0^{(t)}f_h(s^{(t)})$ \quad[10]\\
-\\$s^{(t-1)} = g_f^{(t)}s^{(t-1)} + g_i^{(t)}f_s(wh^{(t-1)}) + uX^{(t)} + b$ \quad[10]\\
-\\$g_i^{(t)} = sigmold (w_ih^{(t-1)} + u_iX^{(t)} + b_i$ \quad[10]\\
-\\$g_f^{(t)} = sigmold (w_fh^{(t-1)} + u_fX^{(t)} + b_f$ \quad[10]\\
-\\$g_f^{(t)} = sigmold (w_oh^{(t-1)} + u_oX^{(t)} + b_o$ \quad[10]\\
+\\$h^{(t)} = g_0^{(t)}f_h(s^{(t)})$ \quad[11]\\
+\\$s^{(t-1)} = g_f^{(t)}s^{(t-1)} + g_i^{(t)}f_s(wh^{(t-1)}) + uX^{(t)} + b$ \quad[11]\\
+\\$g_i^{(t)} = sigmold (w_ih^{(t-1)} + u_iX^{(t)} + b_i$ \quad[11]\\
+\\$g_f^{(t)} = sigmold (w_fh^{(t-1)} + u_fX^{(t)} + b_f$ \quad[11]\\
+\\$g_f^{(t)} = sigmold (w_oh^{(t-1)} + u_oX^{(t)} + b_o$ \quad[11]\\
 \\ where $f_h$ and $f_s$
 represent the activation functions of the 
 system state and internal state, typically utilizing the 
@@ -293,30 +294,30 @@ A GRU unit consists of three main components: an update gate, a reset gate and t
   \begin{minipage}{0.8\linewidth}
     \centering
     \includegraphics[width=\linewidth]{bibliography/Figure/GRU.png}
-    \caption{GRU Model At Time Step t [10]}
+    \caption{GRU Model At Time Step t [11]}
     \label{fig10}
   \end{minipage}
 \end{figure}
 
 The update gate determines how much of the past information should be retained and combined with the current input at a specific time step.
-\[z_t = \sigma(W_z[h_{t-1},x_t] + b_z)\quad[10]\]
+\[z_t = \sigma(W_z[h_{t-1},x_t] + b_z)\quad[11]\]
 The reset gate decides how much of the past information should be forgotten.
-\[r_t = \sigma(W_r[h_{t-1},x_t] + b_r)\quad[10]\]
+\[r_t = \sigma(W_r[h_{t-1},x_t] + b_r)\quad[11]\]
 The current memory content is computed based on the reset gate and the concatenation of the transformed previous hidden state and the current input.
-\[\Tilde{h}_t = \tanh(W_h[r_{t}h_{t},x_t])\quad[10]\]
+\[\Tilde{h}_t = \tanh(W_h[r_{t}h_{t},x_t])\quad[11]\]
 The final memory state $h_t$ is determined by a combination of the previous hidden state and the candidate activation.
-\[h_t = (1 - z_t)h_{t-1} + z_{t}\Tilde{h}_t\quad[10]\]
+\[h_t = (1 - z_t)h_{t-1} + z_{t}\Tilde{h}_t\quad[11]\]
 Finally, the output gate is computed using the current memory state $h_t$ and is typically followed by an activation function, such as the sigmold function.
-\[o_t = \sigma_o(W_{o}h_t + b_o)\quad[10]\]
+\[o_t = \sigma_o(W_{o}h_t + b_o)\quad[11]\]
 
 \subsection{FCN}
-Fully Convolutional Neural Networks (FCNs) were first proposed in Wang et al. (2017b) for classifying univariate time series and validated on 44 datasets from the UCR/UEA archive. FCNs are mainly convolutional networks that do not contain any local pooling layers which means that the length of a time series is kept unchanged throughout the convolutions. In addition, one of the main characteristics of this architecture is the replacement of the traditional final FC layer with a Global Average Pooling (GAP) layer which reduces drastically the number of parameters in a neural network while enabling the use of the CAM (Zhou et al., 2016) that highlights which parts of the input time series contributed the most to a certain classification.  [11]
+Fully Convolutional Neural Networks (FCNs) were first proposed in Wang et al. (2017b) for classifying univariate time series and validated on 44 datasets from the UCR/UEA archive. FCNs are mainly convolutional networks that do not contain any local pooling layers which means that the length of a time series is kept unchanged throughout the convolutions. In addition, one of the main characteristics of this architecture is the replacement of the traditional final FC layer with a Global Average Pooling (GAP) layer which reduces drastically the number of parameters in a neural network while enabling the use of the CAM (Zhou et al., 2016) that highlights which parts of the input time series contributed the most to a certain classification.  [12]
 \begin{figure}[H]
     \centering
     \begin{minipage}{1\linewidth}
         \centering
         \includegraphics[width=\linewidth]{bibliography/fullyConvolutionalNeuralNetworkArchitecture.png}
-        \caption{Fully Convolutional Neural Network architecture [11]}
+        \caption{Fully Convolutional Neural Network architecture [12]}
         \label{fig11}
     \end{minipage}
 \end{figure}
@@ -342,21 +343,21 @@ Where: \\
          \hline
          \centering Model & Training:Testing & RMSE & MAPE (\%) & MSLE\\
          \hline
-         \multirow{2}{*}{LR} & \textbf{7:3} & \textbf{3993.14} & 24.3741 & \textbf{0.07304} \\ & 8:2 & 4163.78 & \textbf{13.5631} & 0.07678 \\ & 9:1 & 5940.92 & 22.6138 & 0.15792\\
+         \multirow{2}{*}{LR} & 7:3 & 3993.14 & 24.3741 & 0.07304 \\ & 8:2 & 4163.78 & 13.5631 & 0.07678 \\ & 9:1 & 5940.92 & 22.6138 & 0.15792\\
          \hline
-         \multirow{2}{*}{ARIMA} & 7:3&3581.65&16.3043&0.06087\\ & \textbf{8:2}&\textbf{3341.08}&\textbf{10.9181}&\textbf{0.04085} \\ & 9:1 & 5375.16 & 19.9011 &0.11742\\
+         \multirow{2}{*}{ARIMA} & 7:3&3581.65&16.3043&0.06087\\ & 8:2&3341.08&10.9181&0.04085 \\ & 9:1 & 5375.16 & 19.9011 &0.11742\\
          \hline
-         \multirow{2}{*}{SEMOS} & \textbf{7:3}	& \textbf{610.171} & \textbf{2.65241} & \textbf{0.00141} \\ & 8:2 & 1616.817 & 1.267 & 0.00035 \\ & 9:1 & 1699.655  & 1.052 & 0.00032\\
+         \multirow{2}{*}{SEMOS} & 7:3 & 3962.49 & 18.2408 & 0.08073 \\ & 8:2 & 3947.04 & 13.3932 & 0.06523 \\ & 9:1 & 6018.41  & 25.2501 & 0.16638\\
          \hline
-         \multirow{2}{*}{Stacking} & \textbf{7:3} &  \textbf{197.562} & \textbf{0.92907} & \textbf{0.00015} \\ & 8:2 & 240.401 & 1.01158 & 0.00021 \\ & 9:1 & 434.257  & 1.59473 & 0.00038\\
+         \multirow{2}{*}{Stacking} & \textbf{7:3} &  \textbf{197.562} & \textbf{0.92907} & \textbf{0.00015} \\ & \textbf{8:2} & \textbf{240.401} & \textbf{1.01158} & \textbf{0.00021} \\ & \textbf{9:1} & \textbf{434.257}  & \textbf{1.59473} & \textbf{0.00038}\\
          \hline
-         \multirow{2}{*}{RNN} & \textbf{7:3}	& \textbf{610.171} & \textbf{2.65241} & \textbf{0.00141} \\ & 8:2 & 776.437 & 2.90091 & 0.00179 \\ & 9:1 & 1254.82  & 4.54483 & 0.00329\\
+         \multirow{2}{*}{RNN} & 7:3	& 779.731 & 4.25189 & 0.00269 \\ & 8:2 & 813.972 & 3.60593 & 0.00227 \\ & 9:1 & 1337.81  & 5.16975 & 0.00387\\
          \hline
-         \multirow{2}{*}{FCN} & 7:3 & 2523.85 & 17.0891 & 0.04537 \\ & 8:2 &	\textbf{990.824} & 5.53287 & 0.00654 \\ & \textbf{9:1} & 1226.98	& \textbf{5.30376} & \textbf{0.00492}\\
+         \multirow{2}{*}{FCN} & 7:3 & 5147.77 & 32.5057 & 0.17553 \\ & 8:2 &	3881.08 & 16.3598 & 0.05691 \\ & 9:1 & 8015.63	& 35.2079 & 0.20307\\
          \hline
-         \multirow{2}{*}{GRU} & \textbf{7:3} & \textbf{424.191} & \textbf{1.74601} & \textbf{0.00069} \\ & 8:2 & 440.368 & 2.00419 & 0.00072 \\ & 9:1 &  880.814 & 3.36061 & 0.00171 \\
+         \multirow{2}{*}{GRU} & 7:3 & 424.191 & 1.74601& 0.00069 \\ & 8:2 & 440.368 & 2.00419 & 0.00072 \\ & 9:1 &  880.814 & 3.36061 & 0.00171 \\
          \hline
-         \multirow{2}{*}{LSTM} & \textbf{7:3} & \textbf{517.393} &  \textbf{2.26375} &  \textbf{0.00108} \\ & 8:2 & 603.747 &  2.45307 &  0.00126 \\ & 9:1 & 851.073 & 3.27205 & 0.00162\\
+         \multirow{2}{*}{LSTM} & 7:3 & 450.836 &  1.89826 &  0.00078 \\ & 8:2 & 600.371 &  2.27099 &  0.00116 \\ & 9:1 & 917.374 & 3.41183 & 0.00184\\
          \hline
     \end{tabular}
     \caption{HVN Dataset's Evaluation}
@@ -367,48 +368,8 @@ Where: \\
   \centering
   \begin{minipage}{0.8\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{bibliography/Image_Result/LinearRegression_HVN_73.png}
-    \caption{Linear model's result with 7:3 splitting proportion}
-    \label{fig8}
-  \end{minipage}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.8\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/Image_Result/ARIMA_HVN_82.png}
-    \caption{ARIMA model's result with 8:2 splitting proportion}
-    \label{fig9}
-  \end{minipage}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.8\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/Stacking_HVN_73.png}
-    \caption{SEMOS model's result with 9:1 splitting proportion}
-    \label{fig8}
-  \end{minipage}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.8\linewidth}
-    \centering
     \includegraphics[width=\linewidth]{bibliography/Image_Result/Stacking_HVN_73.png}
     \caption{Stacking model's result with 7:3 splitting proportion}
-    \label{fig9}
-  \end{minipage}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.8\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/Image_Result/RNN_HVN_73.png}
-    \caption{RNN model's result with 7:3 splitting proportion}
     \label{fig8}
   \end{minipage}
 \end{figure}
@@ -417,9 +378,19 @@ Where: \\
   \centering
   \begin{minipage}{0.8\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{bibliography/Image_Result/fcn_hvn_91.png}
-    \caption{FCN model's result with 9:1 splitting proportion}
+    \includegraphics[width=\linewidth]{bibliography/Image_Result/Stacking_HVN_82.png}
+    \caption{Stacking model's result with 8:2 splitting proportion}
     \label{fig9}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Image_Result/Stacking_HVN_91.png}
+    \caption{Stacking model's result with 9:1 splitting proportion}
+    \label{fig8}
   \end{minipage}
 \end{figure}
 
@@ -429,7 +400,7 @@ Where: \\
     \centering
     \includegraphics[width=\linewidth]{bibliography/Figure/GRU_HVN_73.png}
     \caption{GRU model's result with 7:3 splitting proportion}
-    \label{fig8}
+    \label{fig9}
   \end{minipage}
 \end{figure}
 
@@ -437,11 +408,13 @@ Where: \\
   \centering
   \begin{minipage}{0.8\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{bibliography/Figure/LSTM_HVN_73.png}
-    \caption{LSTM model's result with 7:3 splitting proportion}
-    \label{fig9}
+    \includegraphics[width=\linewidth]{bibliography/Figure/GRU_HVN_82.png}
+    \caption{GRU model's result with 8:2 splitting proportion}
+    \label{fig8}
   \end{minipage}
 \end{figure}
+
+
 
 \subsection{SCS dataset} 
 \begin{table}[H]
@@ -452,22 +425,23 @@ Where: \\
          \hline
          \centering Model & Training:Testing & RMSE & MAPE (\%) & MSLE\\
          \hline
-         \multirow{2}{*}{LR} & 7:3 & 9905.85 & 13.9523 & 0.02007 \\ & \textbf{8:2} & \textbf{7788.89} & 10.3625 & \textbf{0.01199} \\ & 9:1 & 8985.64 & \textbf{9.69887} & 0.01395\\
-         \hline
-         \multirow{2}{*}{ARIMA} & \textbf{7:3}&\textbf{7633.15}&\textbf{6.23802}&\textbf{0.01103}\\ & 8:2&11243.2&10.7119&0.02545 \\ & 9:1 &  13349.1 & 12.7524& 0.03356\\
-         \hline
-         \multirow{2}{*}{SEMOS} & \textbf{7:3}	& \textbf{1545.676} & \textbf{1.262} & \textbf{0.00033} \\ & 8:2 & 1616.817 & 1.267 & 0.00035 \\ & 9:1 & 1699.655  & 1.052 & 0.00032\\
-         \hline
-         \multirow{2}{*}{Stacking} & \textbf{7:3} &  \textbf{457.389} &  \textbf{0.48271} & \textbf{0.00004} \\ & 8:2 &  532.678 & 0.53753 &  0.00005 \\ & 9:1 & 678.649 & 0.64756 & 0.00006\\
-         \hline
-         \multirow{2}{*}{RNN} & \textbf{7:3} &  \textbf{1441.73} &  \textbf{1.41166} & \textbf{0.00038} \\ & 8:2 &  1576.35 & 1.60094 &  0.00046 \\ & 9:1 & 1715.44 & 1.60622 & 0.00041\\
-         \hline
-         \multirow{2}{*}{FCN} & 7:3 & \textbf{1755.93} & 2.12337 & 0.00064 \\ & \textbf{8:2} &	1765.97 & \textbf{1.91911} & \textbf{0.00058} \\ & 9:1 & 2607.35	& 2.81101 & 0.00112\\
-         \hline
-         \multirow{2}{*}{GRU} & \textbf{7:3} & \textbf{946.301} & \textbf{0.88267} & \textbf{0.00017} \\ & 8:2 & 1257.21 & 1.14076 & 0.00028 \\ & 9:1 & 1475.51 &	1.31043 & 0.00031 \\
-         \hline
-         \multirow{2}{*}{LSTM} & 7:3 & 1299.93 &  1.34468 &  0.00032 \\ & \textbf{8:2} & \textbf{1260.76} &  \textbf{1.16337} &  \textbf{0.00028} \\ & 9:1 & 2390.65 & 2.37200 & 0.00081\\
-         \hline
+        \multirow{2}{*}{LR} & 7:3 & 9905.85 & 13.9523 & 0.02007 \\ & 8:2 & 7788.89 & 10.3625 & 0.01199 \\ & 9:1 & 8985.64 & 9.69887 & 0.01395 \\
+        \hline
+        \multirow{2}{*}{ARIMA} & 7:3 & 7633.15 & 6.23802 & 0.01103 \\ & 8:2 & 11243.2 & 10.7119 & 0.02545 \\ & 9:1 & 13349.1 & 12.7524 & 0.03356 \\
+        \hline
+        \multirow{2}{*}{SEMOS} & 7:3 & 6451.95 & 7.50616 & 0.00812 \\ & 8:2 & 8462.03 & 6.90038 & 0.01311 \\ & 9:1 & 11244.7 & 10.5766 & 0.02261 \\
+        \hline
+        \multirow{2}{*}{Stacking} & \textbf{7:3} & \textbf{457.389} & \textbf{0.48271} & \textbf{0.00004} \\ & \textbf{8:2} & \textbf{532.678} & \textbf{0.53753} & \textbf{0.00005} \\ & \textbf{9:1} & \textbf{678.649} & \textbf{0.64756} & \textbf{0.00006} \\
+        \hline
+        \multirow{2}{*}{RNN} & 7:3 & 1383.81 & 1.35395 & 0.00036 \\ & 8:2 & 1828.88 & 1.83307 & 0.00061 \\ & 9:1 & 2145.41 & 2.02933 & 0.00064 \\
+        \hline
+        \multirow{2}{*}{FCN} & 7:3 & 3276.81 & 3.68393 & 0.00226 \\ & 8:2 & 3450.99 & 3.83999 & 0.00208 \\ & 9:1 & 7511.55 & 7.62490 & 0.00803 \\
+        \hline
+        \multirow{2}{*}{GRU} & 7:3 & 946.301 & 0.88267 & 0.00017 \\ & 8:2 & 1123.88 & 0.97304 & 0.00022 \\ & 9:1 & 1475.51 & 1.31043 & 0.00031 \\
+        \hline 
+        \multirow{2}{*}{LSTM} & 7:3 & 1183.07 & 1.12567 & 0.00027 \\ & 8:2 & 1242.92 & 1.18776 &  0.00029 \\ & 9:1 & 2017.59 & 1.84989 & 0.00057 \\
+        \hline
+        
     \end{tabular}
     \caption{SCS Dataset's Evaluation}
     \label{vcbresult}
@@ -478,48 +452,8 @@ Where: \\
   \centering
   \begin{minipage}{0.8\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{bibliography/Image_Result/LinearRegression_SCS_82.png}
-    \caption{Linear model's result with 8:2 splitting proportion}
-    \label{fig8}
-  \end{minipage}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.8\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/Image_Result/ARIMA_SCS_73.png}
-    \caption{ARIMA model's result with 7:3 splitting proportion}
-    \label{fig9}
-  \end{minipage}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.8\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/Image_Result/Stacking_HVN_73.png}
-    \caption{SEMOS model's result with 9:1 splitting proportion}
-    \label{fig8}
-  \end{minipage}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.8\linewidth}
-    \centering
     \includegraphics[width=\linewidth]{bibliography/Image_Result/Stacking_SCS_73.png}
     \caption{Stacking model's result with 7:3 splitting proportion}
-    \label{fig9}
-  \end{minipage}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.8\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/Image_Result/RNN_SCS_73.png}
-    \caption{RNN model's result with 7:3 splitting proportion}
     \label{fig8}
   \end{minipage}
 \end{figure}
@@ -528,9 +462,19 @@ Where: \\
   \centering
   \begin{minipage}{0.8\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{bibliography/Image_Result/fcn_scs_82.png}
-    \caption{FCN model's result with 8:2 splitting proportion}
+    \includegraphics[width=\linewidth]{bibliography/Image_Result/Stacking_SCS_82.png}
+    \caption{Stacking model's result with 8:2 splitting proportion}
     \label{fig9}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Image_Result/Stacking_SCS_91.png}
+    \caption{Stacking model's result with 9:1 splitting proportion}
+    \label{fig8}
   \end{minipage}
 \end{figure}
 
@@ -540,7 +484,7 @@ Where: \\
     \centering
     \includegraphics[width=\linewidth]{bibliography/Figure/GRU_SCS_73.png}
     \caption{GRU model's result with 7:3 splitting proportion}
-    \label{fig8}
+    \label{fig9}
   \end{minipage}
 \end{figure}
 
@@ -548,11 +492,12 @@ Where: \\
   \centering
   \begin{minipage}{0.8\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{bibliography/Figure/LSTM_SCS_82.png}
-    \caption{LSTM model's result with 8:2 splitting proportion}
-    \label{fig9}
+    \includegraphics[width=\linewidth]{bibliography/Figure/GRU_SCS_82.png}
+    \caption{GRU model's result with 8:2 splitting proportion}
+    \label{fig8}
   \end{minipage}
 \end{figure}
+
 
 \subsection{VJC dataset} 
 \begin{table}[H]
@@ -563,22 +508,23 @@ Where: \\
          \hline
          \centering Model & Training:Testing & RMSE & MAPE (\%) & MSLE\\
          \hline
-         \multirow{2}{*}{LR} & 7:3 & 21720.7 & 20.7604 & 0.03762 \\ & 8:2 & 12454.9 & 11.3989 & 0.01373 \\ & \textbf{9:1} & \textbf{4220.91} & \textbf{2.76031} & \textbf{0.00149}\\
-         \hline
-         \multirow{2}{*}{ARIMA} & 7:3&7056.66&5.94446&0.00465\\ & 8:2&7807.39&5.87333&0.00579 \\ & \textbf{9:1} & \textbf{4857.61} & \textbf{4.07812} &\textbf{0.00203}\\
-         \hline
-         \multirow{2}{*}{SEMOS} & \textbf{7:3}	& \textbf{1545.676} & \textbf{1.262} & \textbf{0.00033} \\ & 8:2 & 1616.817 & 1.267 & 0.00035 \\ & 9:1 & 1699.655  & 1.052 & 0.00032\\
-         \hline
-         \multirow{2}{*}{Stacking} & \textbf{7:3} & \textbf{791.931} &  \textbf{0.56862} &  \textbf{0.00005} \\ & 8:2 &  859.683 & 0.57597 & 0.00006 \\ & 9:1 & 985.981 & 0.66053 & 0.00007\\
-         \hline
-         \multirow{2}{*}{RNN} & \textbf{7:3}	& \textbf{2153.31} & \textbf{1.49846} & \textbf{0.00042} \\ & 8:2 & 2332.43 & 1.40122 & 0.00047 \\ & 9:1 & 3634.93 & 2.16684 & 0.00107\\
-         \hline
-         \multirow{2}{*}{FCN} & 7:3 & 5254.80 & 4.36589 & 0.00263 \\ & 8:2 &	2682.99 & 2.05971 & 0.00065 \\ & \textbf{9:1} & \textbf{2646.81}	& \textbf{1.53967} & \textbf{0.00057}\\
-         \hline
-         \multirow{2}{*}{GRU} & \textbf{7:3} & \textbf{1502.23} & \textbf{0.95296} & \textbf{0.00021} \\ & 8:2 & 1697.52 & 0.99987 & 0.00025 \\ & 9:1 & 2567.96 & 1.47789 & 0.00054 \\
-         \hline
-         \multirow{2}{*}{LSTM} & 7:3 & 1793.41 &  1.24209 & 0.00029 \\ & \textbf{8:2} & \textbf{1726.18} &  \textbf{1.03356} &  \textbf{0.00026} \\ & 9:1 & 2684.56 & 1.71757 & 0.00058\\
-         \hline
+            \multirow{2}{*}{LR} & 7:3 & 21720.7 & 20.7604 & 0.03762 \\ & 8:2 & 12454.9 & 11.3989 & 0.01373 \\ & 9:1 & 4220.91 & 2.76031 & 0.00149 \\
+            \hline
+            \multirow{2}{*}{ARIMA} & 7:3 & 7056.66 & 5.94446 & 0.00465 \\ & 8:2 & 7807.39 & 5.87333 & 0.00579 \\ & 9:1 & 4857.61 & 4.07812 & 0.00203 \\
+            \hline
+            \multirow{2}{*}{SEMOS} & 7:3 & 7241.33 & 6.12661 & 0.00489 \\ & 8:2 & 10233.5 & 8.45117 & 0.01041 \\ & 9:1 & 4496.74 & 2.22865 & 0.00169 \\
+            \hline
+            \multirow{2}{*}{Stacking} & \textbf{7:3} & \textbf{798.243} & \textbf{0.57291} & \textbf{0.00006} \\ & \textbf{8:2} & \textbf{862.898} & \textbf{0.57633} & \textbf{0.00007} \\ & \textbf{9:1} & \textbf{984.336} & \textbf{0.65617} & \textbf{0.00008} \\
+            \hline
+            \multirow{2}{*}{RNN} & 7:3 & 2051.11 & 1.44206 & 0.00038 \\ & 8:2 & 2312.08 & 1.49321 & 0.00046 \\ & 9:1 & 3826.83 & 2.24303 & 0.00121 \\
+            \hline
+            \multirow{2}{*}{FCN} & 7:3 & 8798.61 & 7.04139 & 0.00681 \\ & 8:2 & 8950.51 & 7.41324 & 0.00712 \\ & 9:1 & 5649.02 & 4.77011 & 0.00264 \\
+            \hline
+            \multirow{2}{*}{GRU} & 7:3 & 1502.23 & 0.95296 & 0.00021 \\ & 8:2 & 1697.52 & 0.99987 & 0.00025 \\ & 9:1 & 2567.96 & 1.47789 & 0.00054 \\
+            \hline
+            \multirow{2}{*}{LSTM} & 7:3 & 1860.28 & 1.32234 & 0.00032 \\ & 8:2 & 1780.11 & 1.06262 & 0.00027 \\ & 9:1 & 2791.86 & 1.69092 & 0.00063 \\
+            \hline
+            
     \end{tabular}
     \caption{VJC Dataset's Evaluation}
     \label{vcbresult}
@@ -588,48 +534,8 @@ Where: \\
   \centering
   \begin{minipage}{0.8\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{bibliography/Image_Result/LinearRegression_VJC_91.png}
-    \caption{Linear model's result with 9:1 splitting proportion}
-    \label{fig8}
-  \end{minipage}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.8\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/Image_Result/ARIMA_VJC_91.png}
-    \caption{ARIMA model's result with 9:1 splitting proportion}
-    \label{fig9}
-  \end{minipage}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.8\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/Stacking_HVN_73.png}
-    \caption{SEMOS model's result with 9:1 splitting proportion}
-    \label{fig8}
-  \end{minipage}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.8\linewidth}
-    \centering
     \includegraphics[width=\linewidth]{bibliography/Image_Result/Stacking_VJC_73.png}
     \caption{Stacking model's result with 7:3 splitting proportion}
-    \label{fig9}
-  \end{minipage}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \begin{minipage}{0.8\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{bibliography/Image_Result/RNN_VJC_73.png}
-    \caption{RNN model's result with 7:3 splitting proportion}
     \label{fig8}
   \end{minipage}
 \end{figure}
@@ -638,9 +544,19 @@ Where: \\
   \centering
   \begin{minipage}{0.8\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{bibliography/Image_Result/fcn_vjc_91.png}
-    \caption{FCN model's result with 9:1 splitting proportion}
+    \includegraphics[width=\linewidth]{bibliography/Image_Result/Stacking_VJC_82.png}
+    \caption{Stacking model's result with 8:2 splitting proportion}
     \label{fig9}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Image_Result/Stacking_VJC_91.png}
+    \caption{Stacking model's result with 9:1 splitting proportion}
+    \label{fig8}
   \end{minipage}
 \end{figure}
 
@@ -650,7 +566,7 @@ Where: \\
     \centering
     \includegraphics[width=\linewidth]{bibliography/Figure/GRU_VJC_73.png}
     \caption{GRU model's result with 7:3 splitting proportion}
-    \label{fig8}
+    \label{fig9}
   \end{minipage}
 \end{figure}
 
@@ -658,28 +574,35 @@ Where: \\
   \centering
   \begin{minipage}{0.8\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{bibliography/Figure/LSTM_VJC_82.png}
-    \caption{LSTM model's result with 8:2 splitting proportion}
-    \label{fig9}
+    \includegraphics[width=\linewidth]{bibliography/Figure/GRU_VJC_82.png}
+    \caption{GRU model's result with 8:2 splitting proportion}
+    \label{fig8}
   \end{minipage}
 \end{figure}
 
 
+
+
 \section{Conclusion}
 \subsection{Summary}
-In the pursuit of forecasting stock prices, a variety of methodologies have been explored, ranging from traditional statistical models to advanced machine learning algorithms. Among the models applied, Linear Regression (LR), Auto Regressive Integrated Moving Average (ARIMA), Recurrent Neural Networks (RNN), Gated Recurrent Unit (GRU), Long Short-Term Memory (LSTM), Seasonal Exponential Smoothing (SEMOS), Stacking, and Fully Convolutional Networks (FCN), it is evident that GRU, LSTM, and Stacking emerge as the most promising and effective models for predicting stock prices.
+This study has explored the application of advanced statistical, machine learning, and deep learning algorithms to predict stock prices in the Vietnamese market, focusing on three major companies: Vietnam Airlines JSC (HVN), SCSC Cargo Service Corporation (SCS), and Vietjet Aviation Joint Stock Company (VJC). The time-series models utilized in this study include Linear Regression, ARIMA, RNN, GRU, LSTM, SEMOS, Stacking, and FCN.
 
-The complexities of stock price forecasting, rooted in the intricacies and unpredictability of financial markets, demand models capable of capturing nuanced patterns and relationships within the data. GRU models exhibit notable performance in forecasting stock prices by capturing sequential dependencies. LSTM models further enhance this capability by effectively handling long-term dependencies, providing robust predictions. The introduction of ensemble learning through Stacking refines the predictive capabilities even further, offering collective insights that surpass individual models.
+The results demonstrate that each model has its strengths and weaknesses in predicting stock prices. Specifically,  after comparing models with different splitting ratios on 3 datasets spanning from 01/03/2019 to 01/06/2024, we have obtained the model that give the best forecast result for each dataset as follows: \\
+\indent\textbullet\ For the HVN dataset, the Stacking model outperformed others with a RMSE of 197.562, MAPE of 0.92907\%, and MSLE of 0.00015 for a 7:3 train:test ratio. Additionally, it obtained the highest accuracy for both the 8:2 and 9:1 ratios.\\
+\indent\textbullet\ For the SCS dataset, the Stacking model again showed superior performance with a RMSE of 457.389, MAPE of 0.48271\%, and MSLE of 0.00004 for a 7:3 ratio. 
+It also had the best results for the 8:2 and 9:1 ratios.\\
+\indent\textbullet\ For the VJC dataset, the Stacking model demonstrated the best performance with a RMSE of 798.243, MAPE of 0.57291\%, and MSLE of 0.00006 for a 7:3 ratio. The model also achieved the best results for the 8:2 and 9:1 ratios.
 
-As evidenced by the evaluation metrics, including RMSE, MAPE, and MSLE, the GRU, LSTM, and Stacking models consistently demonstrate superior performance across various aspects of forecasting accuracy. Their adaptability to handle the inherent uncertainties of stock markets positions them as formidable tools for investors and analysts seeking reliable predictions.
+Through rigorous evaluation, the study confirms that the Stacking algorithm, despite demonstrating good performance in predicting stock prices in Vietnam, utilizes exogenous variables such as High and Low in both the base model and meta model. In reality, data for these attributes on any given day are only available once the stock market trading session for that day has concluded. This limitation implies that the model's effectiveness may not fully reflect its predictive capabilities under real-world conditions when actual data on the highest and lowest prices of the day are lacking.
+
+These studies provide valuable insights for investors and fund managers in Vietnam, enabling them to make informed decisions and enhance investment efficiency. This contributes to the sustainable development and stability of the Vietnamese stock market in general, including the specific airlines Vietnam Airlines JSC, SCSC Cargo Service Corporation and Vietjet Aviation Joint Stock Company. Moreover, it fosters investor confidence in market analysis and forecasting capabilities.
 
 \subsection{Future Considerations}
-In our future research, it is crucial to prioritize further optimization of the previously mentioned models. This optimization effort should specifically focus on:
-\indent\textbullet\ Enhancing the accuracy of the model. While the above algorithms have demonstrated promising results in predicting stock prices, there is a need to further improve the model's accuracy to ensure more precise forecasting outcomes.\
-\indent\textbullet\ Exploring alternative machine learning algorithms or ensemble techniques. Ensemble techniques, such as combining multiple models or using various ensemble learning methods, can also improve the robustness and accuracy of the forecasts.\
-\indent\textbullet\ Researching new forecasting models. The field of forecasting continuously evolves, with new algorithms and models being researched and developed. It is crucial to stay updated with these approaches and explore new forecasting models that offer improved accuracy and performance.\
+While the current study presents significant advancements in stock price prediction, several avenues for future research remain. These include:\\
+\indent\textbullet\ Expansion of dataset and feature inclusion: future research should consider expanding the dataset to include a broader range of features beyond the "Close" prices, such as trading volume, market sentiment indicators, and macroeconomic variables. This could enhance the predictive power of the models by providing a more comprehensive view of the factors influencing stock prices. \\
+\indent\textbullet\ Real-time prediction and algorithm optimization: implementing real-time prediction systems that continuously update model parameters as new data becomes available can significantly improve the applicability of the models in dynamic market conditions. Additionally, optimizing algorithm parameters through techniques such as grid search or Bayesian optimization can further refine model performance. \\
+\indent\textbullet\ Incorporation of advanced techniques: future studies could explore the incorporation of more sophisticated techniques such as transfer learning, which can leverage knowledge from related tasks to improve prediction accuracy. Additionally, the use of explainable AI methods could provide deeper insights into the decision-making processes of complex models, enhancing trust and interpretability for stakeholders.
 
-By continuously exploring and incorporating new features, data sources, and modeling techniques, we can strive for ongoing optimization of the forecasting models and enhance their ability to predict stock prices with greater precision and reliability.
 \section*{Acknowledgment}
 \addcontentsline{toc}{section}{Acknowledgment}
 First and foremost, we would like to express our sincere gratitude to \textbf{Assoc. Prof. Dr. Nguyen Dinh Thuan} and \textbf{Mr. Nguyen Minh Nhut} for their exceptional guidance, expertise, and invaluable feedback throughout the research process. Their mentorship and unwavering support have been instrumental in shaping the direction and quality of this study. Their profound knowledge, critical insights, and attention to detail have significantly contributed to the success of this research.
@@ -693,13 +616,16 @@ First and foremost, we would like to express our sincere gratitude to \textbf{As
 \bibitem{b3} D. Jobst, A. Möller, and J. Groß, "Time Series based Ensemble Model Output Statistics for Temperature Forecasts Postprocessing", Feb 2024, doi: 10.48550/arXiv.2402.00555.
 \bibitem{b4} Xiwen Jin and Chaoran Yi, "The Comparison of Stock Price Prediction Based on Linear Regression Model and Machine Learning Scenarios," in Proceedings of the 2022 International Conference on Bigdata Blockchain and Economy Management (ICBBEM 2022), December 2022, pp. 837-842, doi: 10.2991/978-94-6463-030-5\_82.
 \bibitem{b5} D. Satria, "Predicting Banking Stock Prices Using RNN, LSTM, and GRU Approach," Applied Computer Science, vol. 19, no. 1, pp. 82-94, March 2023, doi: 10.35784/acs-2023-06
-\bibitem{b6} S. Kumar, A. Gupta, K. Arora, and K. Vatta, "Effect of Rainfall in Predicting Tomato Prices in India: An Application of SARIMAX and NARX Model" December 2022, vol. 32, no. 2, pp. 159-164
-\bibitem{b7} B. Soni, "Stacking to Improve Model Performance: A Comprehensive Guide on Ensemble Learning in Python", Medium. Accessed: May 12, 2024. [Online]. Available: https://medium.com/@brijesh\_soni/stacking-to-improve-model-performance-a-comprehensive-guide-on-ensemble-learning-in-python-9ed53c93ce28
-\bibitem{b8} A. Amidi and S. Amidi, "Recurrent Neural Networks cheatsheet" Stanford University. [Accessed: May 25, 2024]. [Online]. Available: https://stanford.edu/~shervine/teaching/cs-230/cheatsheet-recurrent-neural-networks
-\bibitem{b9} Nguyen Minh Nhut, “Mo Hinh Mang Hoi Quy (RNN) trong chuoi thoi gian”
-\bibitem{b10} Farhad Mortezapour Shiri, Thinagaran Perumal, Norwati Mustapha and Raihani Mohamed, "A Comprehensive Overview and Comparative Analysis on Deep Learning Models: CNN, RNN, LSTM, GRU", May 2023, doi: 10.48550/arXiv.2305.17473
-\bibitem{b11} H. I. Fawaz, G. Forestier, J. Weber, L. Idoumghar, and P.-A. Muller, "Deep learning for time series classification: a review," Data Mining and Knowledge Discovery, vol. 33, no. 4, pp. 917-963, Jul. 2019, doi: 10.1007/s10618-019-00619-1.
-\bibitem{b12} D. C. Montgomery, E. A. Peck, and G. G. Vining, "Introduction to Linear Regression Analysis," 5th ed., Hoboken, NJ, USA: Wiley, 2012.
+\bibitem{b6} D. C. Montgomery, E. A. Peck, and G. G. Vining, "Introduction to Linear Regression Analysis," 5th ed., Hoboken, NJ, USA: Wiley, 2012.
+\bibitem{b7} Y. Zhao, "Comparison of Stock Price Prediction in Context of ARIMA and Random Forest Models," BCP Business \& Management, vol. 38, pp. 1880-1885, Mar. 2023, doi: 10.54691/bcpbm.v38i.3996.
+\bibitem{b8} B. Soni, "Stacking to Improve Model Performance: A Comprehensive Guide on Ensemble Learning in Python", Medium. Accessed: May 12, 2024. [Online]. Available: https://medium.com/@brijesh\_soni/stacking-to-improve-model-performance-a-comprehensive-guide-on-ensemble-learning-in-python-9ed53c93ce28
+\bibitem{b9} A. Amidi and S. Amidi, "Recurrent Neural Networks cheatsheet" Stanford University. [Accessed: May 25, 2024]. [Online]. Available: https://stanford.edu/~shervine/teaching/cs-230/cheatsheet-recurrent-neural-networks
+\bibitem{b10} Nguyen Minh Nhut, “Mo Hinh Mang Hoi Quy (RNN) trong chuoi thoi gian”
+\bibitem{b11} Farhad Mortezapour Shiri, Thinagaran Perumal, Norwati Mustapha and Raihani Mohamed, "A Comprehensive Overview and Comparative Analysis on Deep Learning Models: CNN, RNN, LSTM, GRU", May 2023, doi: 10.48550/arXiv.2305.17473
+\bibitem{b12} H. I. Fawaz, G. Forestier, J. Weber, L. Idoumghar, and P.-A. Muller, "Deep learning for time series classification: a review," Data Mining and Knowledge Discovery, vol. 33, no. 4, pp. 917-963, Jul. 2019, doi: 10.1007/s10618-019-00619-1.
+
+
+
 
 \end{thebibliography}
 %%%%%%%%%%%%%%%
