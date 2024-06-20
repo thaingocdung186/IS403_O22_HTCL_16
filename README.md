@@ -4,7 +4,7 @@
 ## Members
 - **Thái Ngọc Dũng** - 21521982
 - **Nguyễn Hoàng Vũ** - 21522799
-- **Trần Hoàng Nhật** - 21522560
+- **Trần Hoàng Nhật** - 21522420
 
 ## Work Distribution
 | Task                    | Thái Ngọc Dũng                | Nguyễn Hoàng Vũ             | Trần Hoàng Nhật              |
