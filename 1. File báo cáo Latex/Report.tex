@@ -11,7 +11,7 @@
 \usepackage{float}
 \usepackage{hyperref}
 \usepackage{amsmath}
-
+\usepackage{array}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
@@ -188,18 +188,15 @@ $$
 y_t=\mu+\sum_{i=1}^p \gamma_i y_{t-i}+\sum_{i=1}^q \theta_i \epsilon_{t-i}+\epsilon_t \quad [7]
 $$
 \subsection{SEMOS}
-SEMOS (Smooth EMOS) is a statistical approach used for post-processing ensemble forecasts, particularly to handle seasonal variations in the predictive distribution parameters. SEMOS integrates seasonal effects directly into the estimation of location and scale parameters, enhancing the accuracy of ensemble forecasts, especially for quantities exhibiting seasonal variability.
+SEMOS (Smooth Ensemble Model Output Statistics) is a statistical approach used for post-processing ensemble forecasts, particularly to handle seasonal variations in the predictive distribution parameters. SEMOS integrates seasonal effects directly into the estimation of location and scale parameters, enhancing the accuracy of ensemble forecasts, especially for quantities exhibiting seasonal variability.
 
-The first parameter is location, in general, represents the central tendency or the "location" of the predictive distribution.In SEMOS, the location parameter is modeled as a function of the ensemble mean forecast and seasonal effects in order to capture systematic biases or trends in the ensemble forecasts:
-$$
-\mu_S(t) = a_0 + f_0(t) + (a_1 + f_1(t)) . x(t) \quad[3]
-$$
-
+The first parameter is location, in general, represents the central tendency or the "location" of the predictive distribution. In SEMOS, the location parameter is modeled as a function of the ensemble mean forecast and seasonal effects in order to capture systematic biases or trends in the ensemble forecasts:
+\[\mu_S(t) = a_0 + f_0(t) + (a_1 + f_1(t)) . x(t) \quad[3]\]
 Where: \\
         \indent\textbullet\ \(\mu_S(t)\) is the location parameter at time t. \\
         \indent\textbullet\ \(a_0, a_1\) are coefficients representing the baseline intercept and slope. \\
         \indent\textbullet\ \(f_0(t), f_1(t)\) are seasonal effects modeled using cyclic regression splines. \\
-        \indent\textbullet\ \(x(t)\) is the ensemble mean forecast at time t \\
+        \indent\textbullet\ \(x(t)\) is the ensemble mean forecast at time t. \\
 
 The scale parameter represents the spread or "scale" of the predictive distribution.It accounts for variations in forecast uncertainty over time, including factors such as model errors and ensemble spread, modeled as a function of the empirical ensemble standard deviation and seasonal effects.
 \[log(\sigma_S(t)) = b_0 + g_0(t) + (b_1 + g_1(t)).s(t) \quad[3]\]
@@ -207,14 +204,23 @@ Where: \\
         \indent\textbullet\ \(\sigma_S(t)\) is the scale parameter at time t. \\
         \indent\textbullet\ \(b_0, b_1\) are coefficients representing the baseline intercept and slope. \\
         \indent\textbullet\ \(g_0(t), g_1(t)\) are seasonal effects modeled using cyclic regression splines. \\
-        \indent\textbullet\ \(s(t)\) is the empirical ensemble standard deviation at time step t.
+        \indent\textbullet\ \(s(t)\) is the ensemble standard deviation at time step t. \\
 
+To apply the smooth into the model, \(f_i(t)\) and \(g_i(t)\) can be defined below in order to reduce the coefficients to smoothly evolve over the year:
+\begin{multline*}
+f_i(t) = \alpha_{i1} \sin\left(\frac{2\pi t}{365.25}\right) + \alpha_{i2} \cos\left(\frac{2\pi t}{365.2}\right) \\
++ \beta_{i3} \sin\left(\frac{4\pi t}{365.2}\right) + \beta_{i4} \cos\left(\frac{4\pi t}{365.2}\right) \quad [3]
+\end{multline*}
+\begin{align*}
+g_i(t) = &\beta_{i1} \sin\left(\frac{2\pi t}{365.25}\right) + \beta_{i2} \cos\left(\frac{2\pi t}{365.25}\right) \\
+&+ \beta_{i3} \sin\left(\frac{4\pi t}{365.25}\right) + \beta_{i4} \cos\left(\frac{4\pi t}{365.25}\right) \quad [3]
+\end{align*}
 \subsection{Stacking}
 
 Stacking, short for Stacked Generalization, is a machine learning algorithm belonging to the Ensemble Learning category. A basic Stacking model is usually divided into two levels: level-0 models and the level-1 model. Level-0 models (base-models) are the foundational models that learn directly from the dataset and produce predictions for the level-1 model (meta-model). The meta-model is trained based on the predicted outputs of the base models. These outputs, combined with the labels, form the input-output pairs during the training process of the meta-model. In this work, ARIMAX and RNN are used as base-models and Linear Regression is selected as meta-model.  
 \begin{figure}[H]
   \centering
-  \begin{minipage}{0.9\linewidth}
+  \begin{minipage}{1\linewidth}
     \centering
     \includegraphics[width=\linewidth]{bibliography/Stacking.png}
     \caption{Stacking Architecture [8]}
@@ -227,7 +233,7 @@ RNN (Recurrent Neural Network) is a type of artificial neural network with feedb
 
 \begin{figure}[H]
   \centering
-  \begin{minipage}{0.9\linewidth}
+  \begin{minipage}{1\linewidth}
     \centering
     \includegraphics[width=\linewidth]{bibliography/RNN.png}
     \caption{RNN Architecture [9]}
@@ -269,7 +275,7 @@ A vanilla LSTM unit is composed of a cell, an input gate, an output gate and a f
 
 \begin{figure}[H]
   \centering
-  \begin{minipage}{0.8\linewidth}
+  \begin{minipage}{0.9\linewidth}
     \centering
     \includegraphics[width=\linewidth]{bibliography/Figure/lstm.png}
     \caption{LSTM Model At Time Step t [11]}
@@ -300,9 +306,9 @@ A GRU unit consists of three main components: an update gate, a reset gate and t
 
 \begin{figure}[H]
   \centering
-  \begin{minipage}{0.8\linewidth}
+  \begin{minipage}{0.9\linewidth}
     \centering
-    \includegraphics[width=\linewidth]{bibliography/Figure/GRU.png}
+    \includegraphics[width=\linewidth]{bibliography/Figure/GRU Model At Time Step t.png}
     \caption{GRU Model At Time Step t [11]}
     \label{fig10}
   \end{minipage}
@@ -323,13 +329,28 @@ Finally, the output gate is computed using the current memory state $h_t$ and is
 Fully Convolutional Neural Networks (FCNs) were first proposed in Wang et al. (2017b) for classifying univariate time series and validated on 44 datasets from the UCR/UEA archive. FCNs are mainly convolutional networks that do not contain any local pooling layers which means that the length of a time series is kept unchanged throughout the convolutions. In addition, one of the main characteristics of this architecture is the replacement of the traditional final FC layer with a Global Average Pooling (GAP) layer which reduces drastically the number of parameters in a neural network while enabling the use of the CAM (Zhou et al., 2016) that highlights which parts of the input time series contributed the most to a certain classification.  [12]
 \begin{figure}[H]
     \centering
-    \begin{minipage}{1\linewidth}
+    \begin{minipage}{1.01\linewidth}
         \centering
         \includegraphics[width=\linewidth]{bibliography/fullyConvolutionalNeuralNetworkArchitecture.png}
         \caption{Fully Convolutional Neural Network architecture [12]}
         \label{fig11}
     \end{minipage}
 \end{figure}
+The FCN is designed for end-to-end classification tasks on univariate time series data. It leverages the power of Convolutional Neural Networks (CNNs) to capture hierarchical features directly from the input time series.
+
+The fundamental building block of FCN is the convolutional layer. The formula for calculating the output of a convolutional layer is as follows:
+\begin{equation*}
+    \text{conv}(i,j) = R \left( \sum_{u=0}^{M-1} \sum_{v=0}^{M-1} w_{u,v} x_{i+u,j+v} + b \right) \quad [13]
+\end{equation*}
+Where:
+\begin{itemize}
+    \item \(\text{conv}(i,j)\) is the convolution result, also known as the feature map.
+    \item \(M\) indicates the size of the convolution kernel (\(M \times M\)).
+    \item \(w_{u,v}\) is the weight of the convolution kernel in line \(u\) and column \(v\).
+    \item \(x_{i+u,j+v}\) is the input time series.
+    \item \(b\) is the bias term.
+    \item \(R\) is the activation function, which brings a nonlinear factor that allows FCN to approximate any nonlinear function.
+\end{itemize}
 
 \section{Result}
 \subsection{Evaluation Methods}
@@ -344,6 +365,7 @@ Where: \\
 	\indent\textbullet\ \(y_i\)  is the true value.\\
 	\indent\textbullet\ \(\hat{y_i}\) is the predicted value.
 \subsection{HVN Dataset} 
+\renewcommand{\arraystretch}{1.23}
 \begin{table}[H]
     \centering
     \begin{tabular}{|c|c|c|c|c|}
@@ -372,7 +394,7 @@ Where: \\
     \caption{HVN Dataset's Evaluation}
     \label{vcbresult}
 \end{table}
-
+\vspace{-2em}
 \begin{figure}[H]
   \centering
   \begin{minipage}{0.8\linewidth}
@@ -382,7 +404,6 @@ Where: \\
     \label{fig8}
   \end{minipage}
 \end{figure}
-
 \begin{figure}[H]
   \centering
   \begin{minipage}{0.8\linewidth}
@@ -423,6 +444,15 @@ Where: \\
   \end{minipage}
 \end{figure}
 
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Figure/LSTM_HVN_73.png}
+    \caption{LSTM model's result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
 
 
 \subsection{SCS dataset} 
@@ -456,7 +486,7 @@ Where: \\
     \label{vcbresult}
 \end{table}
 
-
+\vspace{-2em}
 \begin{figure}[H]
   \centering
   \begin{minipage}{0.8\linewidth}
@@ -507,6 +537,15 @@ Where: \\
   \end{minipage}
 \end{figure}
 
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Figure/LSTM_SCS_73.png}
+    \caption{LSTM model's result with 7:3 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
 
 \subsection{VJC dataset} 
 \begin{table}[H]
@@ -538,7 +577,7 @@ Where: \\
     \caption{VJC Dataset's Evaluation}
     \label{vcbresult}
 \end{table}
-
+\vspace{-2em}
 \begin{figure}[H]
   \centering
   \begin{minipage}{0.8\linewidth}
@@ -589,7 +628,15 @@ Where: \\
   \end{minipage}
 \end{figure}
 
-
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{0.8\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{bibliography/Figure/LSTM_VJC_82.png}
+    \caption{LSTM model's result with 8:2 splitting proportion}
+    \label{fig8}
+  \end{minipage}
+\end{figure}
 
 
 \section{Conclusion}
@@ -631,6 +678,7 @@ First and foremost, we would like to express our sincere gratitude to \textbf{As
 \bibitem{b10} Nguyen Minh Nhut, “Mo Hinh Mang Hoi Quy (RNN) trong chuoi thoi gian”
 \bibitem{b11} Farhad Mortezapour Shiri, Thinagaran Perumal, Norwati Mustapha and Raihani Mohamed, "A Comprehensive Overview and Comparative Analysis on Deep Learning Models: CNN, RNN, LSTM, GRU", May 2023, doi: 10.48550/arXiv.2305.17473
 \bibitem{b12} H. I. Fawaz, G. Forestier, J. Weber, L. Idoumghar, and P.-A. Muller, "Deep learning for time series classification: a review," Data Mining and Knowledge Discovery, vol. 33, no. 4, pp. 917-963, Jul. 2019, doi: 10.1007/s10618-019-00619-1.
+\bibitem{b13} J. Wu, B. Liu, H. Zhang, S. He, and Q. Yang, "Fault Detection Based on Fully Convolutional Networks (FCN)," J. Mar. Sci. Eng., vol. 9, no. 3, p. 259, Mar. 2021. doi: 10.3390/jmse9030259.
 \end{thebibliography}
 \EOD
 \end{document}
